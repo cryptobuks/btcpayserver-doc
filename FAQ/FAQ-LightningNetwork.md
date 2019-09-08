@@ -1,14 +1,18 @@
-This document clarifies some of the most common questions and issues users face with the Lightning Network in BTCPay. Before you start using the off-chain protocol, familiarize yourself with the risks. Additionally, read [Getting Started with Lightning Network in BTCPay](LightningNetwork.md)
+This document clarifies some of the most common questions and issues users face with the Lightning Network in BTCPay. Before you start using the off-chain protocol, familiarize yourself with the risks. Additionally, read [Getting Started with Lightning Network in BTCPay](/LightningNetwork.md)
 
 ## [Lightning Network General FAQ](FAQ-LightningNetwork.md#lightning-network-general-faq)
 * [How many users can use Lightning Network in BTCPay?](FAQ-LightningNetwork.md#how-many-users-can-use-lightning-network-in-btcpay)
 * [How to find node info and open a direct channel with a store using BTCPay?](FAQ-LightningNetwork.md#how-to-find-node-info-and-open-a-direct-channel-with-a-store-using-btcpay)
-* [As a merchant, do I need to open direct channels?](FAQ-LightningNetwork.md#as-a-merchant-do-i-need-to-open-direct-channels) 
+* [As a merchant, do I need to open direct channels?](FAQ-LightningNetwork.md#as-a-merchant-do-i-need-to-open-direct-channels)
+* [How can I get inbound capacity to my node?](FAQ-LightningNetwork.md#how-can-i-get-inbound-capacity-to-my-node)
 * [Previously installed BTCPay without the integrated LN support, can I migrate?](FAQ-LightningNetwork.md#i-previously-installed-btcpayserver-without-the-integrated-lightning-support-can-i-migrate)
-* [Can I used pruned node with LN in BTCPay?](FAQ-LightningNetwork.md#can-i-used-pruned-node-with-ln-in-btcpay)
+* [Can I use a pruned node with LN in BTCPay?](FAQ-LightningNetwork.md#can-i-use-a-pruned-node-with-ln-in-btcpay)
 * [How to change from c-lightning to LND or vice-versa?](FAQ-LightningNetwork.md#how-to-change-from-c-lightning-to-lnd-or-vice-versa)
 * [Switched Lightning Network implementation, getting "no payment available" error](FAQ-LightningNetwork.md#i-switched-lightning-network-implementation-but-getting-no-payment-available-error)
 * [WARNING: The LIGHTNING_ALIAS variable is not set. Defaulting to a blank string" when starting container](FAQ-LightningNetwork.md#i-get-warning-the-lightning_alias-variable-is-not-set-defaulting-to-a-blank-string-when-starting-container)
+* [How to display my Lightning Node information so that others can connect to me?](FAQ-LightningNetwork.md#how-to-display-my-lightning-node-information-so-that-others-can-connect-to-me)
+* [Where can I find recovery seed backup for my Lightning Network wallet in BTCPay Server?](FAQ-LightningNetwork.md#where-can-i-find-recovery-seed-backup-for-my-lightning-network-wallet-in-btcpay-server)
+* [How to disable on-chain payments and use LN payments only?](FAQ-LightningNetwork.md#how-to-disable-on-chain-payments-and-use-ln-payments-only)
 * [Where can I get Lightning Network Support?](FAQ-LightningNetwork.md#lightning-network-questions-and-support)
 
 ## [Lightning Network (LND) FAQ](FAQ-LightningNetwork.md#lightning-network-lnd-faq)
@@ -19,7 +23,8 @@ This document clarifies some of the most common questions and issues users face 
 * [How to change LND Node alias](FAQ-LightningNetwork.md#how-to-change-my-lnd-node-alias)
 
 ## [Lightning Network (c-lightning) FAQ](FAQ-LightningNetwork.md#lightning-network-c-lightning-faq)
-
+* [How to find an on-chain address in Spark?](FAQ-LightningNetwork.md#how-to-find-an-on-chain-address-in-spark)
+* [How to withdraw funds from my on-chain Spark wallet?](FAQ-LightningNetwork.md#how-to-withdraw-funds-from-my-on-chain-spark-wallet)
 
 ## Lightning Network General FAQ
 
@@ -27,7 +32,9 @@ Here are some general questions about LN in BTCPay, regardless of the implementa
 
 ### How many users can use Lightning Network in BTCPay?
 
-In BTCPay, only server admin has the Lightning Network node, due to technical and security reasons. On a self-hosted server, you can use only 1 Lightning Node. If you want to accept LN in multiple stores, you'll have to deploy a separate server for each store.
+Only server admin has the access to the Lightning Network node, for technical and security reasons. On a self-hosted server, you can use only one internal Lightning node.
+
+Server owners can use the same Lightning node for an unlimited number of stores tied to their admin account. Other users can connect to their external nodes. External connection is technically advanced task, and we recommend that if you want Lightning, you should deploy your own server, which comes with all the necessities bundled up.
 
 ### How to find node info and open a direct channel with a store using BTCPay?
 
@@ -44,6 +51,10 @@ The exact procedure of opening a direct Lightning Network channel depends on the
 
 Merchants need incoming channels - other people opening a channel with them, providing liquidity. 
 Your customer should be able to open a direct channel with you. You can also ask well-connected nodes to open a direct channel with you. Opening a channel is not spending funds, it’s more like putting the funds on a pre-paid card, and spending it later, or withdrawing it by closing a channel.
+
+### How can I get inbound capacity to my node?
+There are many ways in which one can get an inbound capacity. We recommend that you read this great article that provides [practical tips to inbound capacity](https://medium.com/lightningto-me/practical-solutions-to-inbound-capacity-problem-in-lightning-network-60224aa13393). 
+When asking for an inboud capacity, consider policy fees a node opening a channel back to you may have. [This document](https://wiki.ion.radar.tech/tutorials/troubleshooting/bootstrapping-channels) provides an overview of what kind of fees to expect from well-known nodes offering the service.
 
 ### I previously installed BTCPayServer without the integrated lightning support, can I migrate?
 
@@ -150,9 +161,9 @@ Here is how it should look like:
 
 ![SecurityRules](/img/azuresecurityrule.png)
 
-### Can I used pruned node with LN in BTCPay?
+### Can I use a pruned node with LN in BTCPay?
 
-Both LND and c-lightning support prunning. 
+Both LND and c-lightning support pruning. 
 
 This will prune your Bitcoin full node to a maximum of 100GB (of blocks):
 ```
@@ -195,6 +206,26 @@ vim $BTCPAY_ENV_FILE
 ```
 
 And add or modify the `LIGHTNING_ALIAS` entry to `LIGHTNING_ALIAS=myawesomenode`.
+
+### How to display my Lightning Node information so that others can connect to me?
+The information other users need to connect to your node, is already displayed at the checkout. Sometimes, merchants want to display their node so that their customers can connect beforehand.
+
+There are numerous ways to find your node information, but the easiest way to display it to others is by using Lightning Node info page. Go to Store > General Settings > Lightning nodes > Modify. At the bottom of the page, there is a "Open Public Node Page" button. Click on it to see the information. The page can be embeded into your website with `<iframe>`. 
+
+![BTCPay Checkout](/img/LightningNodepPageInfo.png)
+
+### Where can I find recovery seed backup for my Lightning Network wallet in BTCPay Server?
+
+BTCPay uses noseedbackup, so you can’t backup your LN wallet or get your recovery seed. This is because in Lightning Network there’s still no solution for backing up funds in channels, just in your on-chain wallet.
+
+If BTCPay was to provide a way to backup the lightning network wallet, it would provide a false sense of security to users, since most funds in the lightning network are in channels anyway. To understand why backup seed gives a false sense of security, watch this [video](https://www.youtube.com/watch?v=5fMv8MpzLgQ). Once again, please understand that the Lightning Network is still in an experimental phase and do not put funds into it, which you're not willing to lose.
+
+### How to disable on-chain payments and use LN payments only?
+
+There are two easy ways to do this:
+
+1. Store Settings > Checkout experience > Choose default payment method at checkout
+2. Store Settings > General settings > Modify > Uncheck the Enabled box to disable on-chain payments
 
 ## Lightning Network (LND) FAQ 
 
@@ -241,6 +272,8 @@ docker exec btcpayserver_lnd_bitcoin rm /data/data/chain/bitcoin/mainnet/readonl
 docker restart btcpayserver_lnd_bitcoin
 ```
 
+If a macaroon does not exist, you will see an error message, you can safely ignore it.
+
 Because this will invalidate the previous macaroons, you need to manually reconnect with Zap with `Server Settings / Services / LND-gRPC`.
 
 ### How to change my LND Node alias?
@@ -256,6 +289,37 @@ export LIGHTNING_ALIAS="namehere"
 ## Lightning Network (c-lightning) FAQ 
 
 Here are some of the common questions about the [c-lightning](https://github.com/ElementsProject/lightning/issues) implementation of the Lightning Network.
+
+### How to find an on-chain address in Spark?
+To fund your on-chain wallet in Spark, you need to get an on-chain address. To find your address, click on the version link at the left corner bottom of the Spark wallet (for example v0.2.2). 
+
+That should toggle the settings. Click > Console. To generate a new address in RPC Console field, enter `newaddr` for bech32 address or `newaddr p2sh-segwit` click execute. At the bottom you should see the newly generated address. 
+You can also toogle help if you need help with other commands in Spark.
+
+![BTCPay Checkout](/img/Spark-console1.png)
+![BTCPay Checkout](/img/Spark-console2.png)
+
+## How to withdraw funds from my on-chain Spark wallet?
+First if your funds are in channel, you need to close channel and wait for them to get back to your on-chain wallet in Spark. (144 blocks in most cases).
+
+Next, you need to toogle the console mode. Click on the version link at the left corner bottom of the Spark wallet [explained above](FAQ-LightningNetwork.md#lightning-network-c-lightning-faq)
+
+That should toggle the settings. Click > Console. 
+
+In console mode there are help commands. The command needed for withdrwawing from an on-chain wallet is called `withdraw`.
+
+```
+withdraw destination satoshi [feerate] [minconf]
+Send to {destination} address {satoshi} (or 'all') amount via Bitcoin transaction
+```
+
+If you want to withdraw 1000 sats to bc1qjl8uwezzlech793lpnyuzy0h2cdkvxvh54v3dn, the exact command would be:
+
+`withdraw bc1qjl8uwezzlech793lpnyuzy0h2cdkvxvh54v3dn 1000` click *execute*. 
+
+![Spark Withdraw](/img/SparkWalletWithdrawConsole.png)
+
+Note that the address format needs to be SegWit, bech32 (starting with bc1).
 
 ## Lightning Network Questions and Support
 

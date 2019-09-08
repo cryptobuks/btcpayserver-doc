@@ -5,8 +5,9 @@
 * [Use Case](UseCase.md)
 * [Walkthrough](Walkthrough.md)
 * [Getting Started](GettingStarted.md)
+* [BTCPay vs other processors](BTCPayVsOthers.md)
 * [Try it Out](TryItOut.md)
-    
+  
 ## Deployment
 
 * [Choosing a Deployment Method](Deployment.md)
@@ -17,8 +18,20 @@
 * [Docker Deployment](DockerDeployment.md)
 * [Google Cloud Deployment](GoogleCloudDeployment.md)
 * [Manual Deployment](ManualDeployment.md)
+    * [Manual Deployment Extended](ManualDeploymentExtended.md)
 * [Hardware Deployment](HardwareDeployment.md)
+* [Raspberry Pi Deployment](RaspberryPiDeployment.md)
 * [Third-Party Hosting](ThirdPartyHosting.md)
+
+### Features
+
+* [Wallet](Wallet.md)
+* [Invoices](Invoices.md)
+* [Apps](Apps.md)
+* [Lightning Network](LightningNetwork.md)
+* [Accounting](Accounting.md)
+* [Payment Requests](PaymentRequests.md)
+* [Dynamic DNS](DynamicDNS.md)
 
 ### Integrations
 
@@ -33,7 +46,6 @@
 
 * [Architecture](Architecture.md)
 * [Developing Locally](LocalDevelopment.md)
-* [Lightning Network](LightningNetwork.md)
 * [How to add an Altcoin](Altcoins.md)
 * [Customize Bootstrap theme](Theme.md)
 

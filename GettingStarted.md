@@ -1,18 +1,26 @@
 # Getting Started with BTCPay Server
 
-After deployment, your BTCPay Server needs to sync the blockchain. Depending on your machine configuration, bandwidth and the number of altcoins you added, this process usually takes between 1-7 days.
+After deployment, your BTCPay Server needs to sync the blockchain. Depending on your machine configuration, bandwidth and the number of altcoins you added, this process usually takes a few days.
 
-There's nothing you can do to bypass it. It may seem tedious, but it's a critical step of running your own full node and not having to trust or rely on anyone. Your node will not only download 200GB of data (less if you're using a pruned node) but also validate all the rules of the consensus. You can find more information about the importance of blockchain synchronization in [this video](https://www.youtube.com/watch?v=OrYDehC-8TU).
+It may seem tedious, but it's a critical step of running your own full node and not having to trust or rely on anyone. Your node will not only download around 200GB of data (less if you're using a pruned node) but also validate all the rules of the consensus. You can find more information about the importance of blockchain synchronization in [this video](https://www.youtube.com/watch?v=OrYDehC-8TU).
 
-You will see the pop-up message showing the sync progress. When your node fully syncs, the pop-up disappears.
+Once your node begins to sync, you will see the pop-up message showing the sync progress in the right corner of your screen. When your node fully syncs, the pop-up disappears.
+
+If you're comfortable with using command line, you can use [FastSync](https://github.com/btcpayserver/btcpayserver-docker/tree/master/contrib/FastSync) and synchronize your node faster.
 
 ## Account Registration
 
+Once your nodes are fully synced, you can proceed with creating your user account.
+
 ![BTCPayRegister1](img/BTCPayRegister1.jpg)
 
-The <strong>first created account</strong> on your newly-created BTCPay Server is automatically an <strong>admin</strong>. You can register your admin account even if your node is not fully synced.
+The <strong>first created account</strong> on a newly-created BTCPay Server is automatically <strong>admin</strong>. You can register your admin account even if your node is not fully synced. 
 
-To register, visit your BTCPay Server URL and click on the "Register" in the upper menu. Input your password and e-mail and click "Register" button. You will automatically be logged in. If you're using a third-party host, you may be asked to verify your e-mail address.
+To register, visit your BTCPay Server URL and click on the "Register" in the upper menu. Input your password and e-mail and click "Register" button. You will automatically be logged in. If you're using a [third-party host](ThirdPartyHosting.md), you may be asked to verify your e-mail address to register.
+
+To allow other users to access your server, you need to enable registration in Server Settings > Policies. Server admins, should also [configure SMTP settings](FAQ/FAQ-ServerSettings.md#how-to-configure-smtp-settings-in-btcpay) to allow password reset via the e-mail for themselves and other users.
+
+When you create an account, optionally, you can further enchance the security by enabling two-factor authentication (both 2FA and U2F are supported). To enable 2FA or U2F, click on the user setting icon in the header menu.
 
 ## Creating BTCPay Store
 
@@ -36,6 +44,8 @@ There are two ways in which you can connect your BTCPay to your wallet:
 Watch the video below or read [this article](https://bitcoinshirt.co/how-to-create-store-accept-bitcoin/8/#Connecting-BTCPay-with-your-wallet) for step by step instructions.
 
 [![ConnectBTCPayWallet](https://img.youtube.com/vi/xX6LyQej0NQ/mqdefault.jpg)](https://www.youtube.com/watch?v=xX6LyQej0NQ "BTCPay - Connecting Wallet")
+
+If you're using altcoins, be sure to repeat the process for each of the alternative coins. Each coin has its own wallet and derivation scheme.
 
 ## Creating the Point of Sale App
 
@@ -62,6 +72,8 @@ Pay buttons are great when you have a fixed amount for a product or a donation. 
 2. Allow anyone to create invoices
 3. Customize your button
 4. Copy the generated form and embed it on your website.
+
+You can also take a look at [this video](https://www.youtube.com/watch?v=MIWGvl6_WzI) which explains how to create a payment button and embed it to your website.
 
 ## Connecting your BTCPay store to your e-commerce platform
 
